@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    tools:ignore="UseCompoundDrawables">
+    <TextView
+        android:id="@+id/user_tv_address_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <ImageView
+        android:id="@+id/user_iv_address_dialog"
+        android:layout_width="13dp"
+        android:layout_height="9dp"
+        android:src="@drawable/user_icon_address_check"
+        android:layout_marginStart="11dp"
+        android:layout_gravity="center_vertical"
+        android:visibility="gone"
+        tools:ignore="ContentDescription" />
+</LinearLayout>

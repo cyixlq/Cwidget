@@ -1,0 +1,6 @@
+<resources>
+    <style name="DialogBottom">
+        <item name="android:windowEnterAnimation">@anim/translate_in</item>
+        <item name="android:windowExitAnimation">@anim/translate_out</item>
+    </style>
+</resources>
