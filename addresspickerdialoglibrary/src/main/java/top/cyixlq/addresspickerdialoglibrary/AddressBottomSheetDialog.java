@@ -122,7 +122,7 @@ public class AddressBottomSheetDialog extends CustomBaseBottomSheetDialog {
                 levelList.remove(i);
                 levelAddress.remove(i);
                 levelPosition.put(i, -1);
-                levelIds.put(i, -1);
+                levelIds.remove(i);
                 tabLayout.removeTabAt(i);
             }
         } else if(selectedTabPosition == maxLevel - 1) { // 如果是最后一个级别地区选择完
