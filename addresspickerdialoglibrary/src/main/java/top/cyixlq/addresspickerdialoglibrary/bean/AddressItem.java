@@ -4,7 +4,7 @@ public class AddressItem {
 
     private String address;
     private boolean isChecked;
-    private int id;
+    private Object id;
 
     public String getAddress() {
         return this.address;
@@ -22,11 +22,11 @@ public class AddressItem {
         this.isChecked = checked;
     }
 
-    public int getId() {
+    public Object getId() {
         return this.id;
     }
 
-    public void setId(int id) {
+    public void setId(Object id) {
         this.id = id;
     }
 

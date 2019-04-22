@@ -23,10 +23,11 @@ public class AddressBottomSheetDialog extends CustomBaseBottomSheetDialog {
     private int maxLevel;   // 最大有多少级的地区，可以通过setMaxLevel方法进行自定义
     private SparseArray<List<AddressItem>> levelList;     // 级别列表数据
     private SparseIntArray levelPosition;                 // 选中的列表position
-    private SparseIntArray levelIds;                      // 各个级别选择的地址ID
+    private SparseArray<Object> levelIds;                 // 各个级别选择的地区ID
+    private SparseArray<String> levelAddress;             // 各个级别选择的地区名称
     private String title;  // 标题
     private String tabText = "请选择";                    // 新的Tab默认显示的文本
-    private TabSelectChangeListener changeListener;       // Tab的选择被改变的监听
+    private EventListener eventListener;       // 事件监听
 
     public AddressBottomSheetDialog(@NonNull Context context) {
         super(context);
@@ -51,7 +52,8 @@ public class AddressBottomSheetDialog extends CustomBaseBottomSheetDialog {
     protected void initView() {
         levelList = new SparseArray<>();
         levelPosition = new SparseIntArray();
-        levelIds = new SparseIntArray();
+        levelAddress = new SparseArray<>();
+        levelIds = new SparseArray<>();
 
         ((TextView)findViewById(R.id.user_tv_dialog_title)).setText(title);
         tabLayout = findViewById(R.id.user_tb_dialog_tab);
@@ -66,9 +68,9 @@ public class AddressBottomSheetDialog extends CustomBaseBottomSheetDialog {
                     addressAdapter.setList(list);
                     final int lastClickPositon = levelPosition.get(position, -1);
                     if (lastClickPositon >= 0) recyclerView.smoothScrollToPosition(lastClickPositon);
-                } else if (changeListener != null) {
+                } else if (eventListener != null) {
                     // 参数position代表的当前地区级别，父级地区ID应该选当前级别的上一个级别，如果没有默认返回-1
-                    changeListener.onSelectChange(position, levelIds.get(position -1, -1));
+                    eventListener.onTabSelectChange(position, levelIds.get(position -1));
                 }
             }
             @Override
@@ -82,10 +84,7 @@ public class AddressBottomSheetDialog extends CustomBaseBottomSheetDialog {
             @Override
             public void onItemClick(int position) {
                 final int selectedTabPosition = tabLayout.getSelectedTabPosition();
-                levelIds.put(selectedTabPosition, levelList.get(selectedTabPosition).get(position).getId());
                 changeSelect(selectedTabPosition, position);
-                levelPosition.put(selectedTabPosition, position);
-                setTabText(selectedTabPosition, levelList.get(selectedTabPosition).get(position).getAddress());
                 if (selectedTabPosition < maxLevel - 1 && selectedTabPosition == tabLayout.getTabCount() - 1) {
                     tabLayout.addTab(createTab(), true);
                     recyclerView.smoothScrollToPosition(0);
@@ -110,18 +109,30 @@ public class AddressBottomSheetDialog extends CustomBaseBottomSheetDialog {
         if (nowClickPosition == lastPosition) {
             return;
         }
-        // 如果不是最后一个，而且又重新选择了级别地址，移除后面的Tab
+        // 当前被点击的地区条目
+        final AddressItem currentClickItem = levelList.get(selectedTabPosition).get(nowClickPosition);
+        levelIds.put(selectedTabPosition, currentClickItem.getId());
+        levelPosition.put(selectedTabPosition, nowClickPosition);
+        levelAddress.put(selectedTabPosition, currentClickItem.getAddress());
+        setTabText(selectedTabPosition, currentClickItem.getAddress());
+        // 如果不是最后一个，而且又重新选择了级别地区，移除后面的Tab
         final int count = tabLayout.getTabCount();
         if (selectedTabPosition < count - 1) {
-            TabLayout.Tab nowTab = tabLayout.getTabAt(selectedTabPosition);
-            if (null != nowTab) nowTab.setText(tabText);
             for (int i = count - 1; i > selectedTabPosition; i--) {
                 levelList.remove(i);
+                levelAddress.remove(i);
                 levelPosition.put(i, -1);
                 levelIds.put(i, -1);
                 tabLayout.removeTabAt(i);
             }
+        } else if(selectedTabPosition == maxLevel - 1) { // 如果是最后一个级别地区选择完
+            StringBuilder address = new StringBuilder();
+            for (int i = 0; i < levelAddress.size(); i++) {
+                address.append(levelAddress.get(i));
+            }
+            eventListener.onResult(address.toString(), levelList.get(selectedTabPosition).get(nowClickPosition));
         }
+        // 更新RecyclerView
         levelList.get(selectedTabPosition).get(nowClickPosition).setChecked(true);
         addressAdapter.notifyItemChanged(nowClickPosition);
         if (lastPosition >= 0) {
@@ -178,14 +189,15 @@ public class AddressBottomSheetDialog extends CustomBaseBottomSheetDialog {
      *  设置Dialog中Tab点击切换的监听
      * @param listener tab切换监听实现
      */
-    public void setTabSelectChangeListener(@NonNull TabSelectChangeListener listener) {
-        this.changeListener = listener;
+    public void setTabSelectChangeListener(@NonNull EventListener listener) {
+        this.eventListener = listener;
     }
 
     /**
      *  自定义的Tab切换监听接口
      */
-    public interface TabSelectChangeListener {
-        void onSelectChange(int level, int parentId);
+    public interface EventListener {
+        void onTabSelectChange(int level, Object parentId);
+        void onResult(String address, AddressItem lastAddressItem);
     }
 }
