@@ -12,7 +12,9 @@
 
 ### 使用方法
 [参照MainActivity](https://github.com/cyixlq/AddressPickerDialog/blob/master/app/src/main/java/top/cyixlq/addresspickerdialog/MainActivity.java)
+
 [快速自定义Adapter，参照SimpleAddressAdapter](https://github.com/cyixlq/AddressPickerDialog/blob/master/addresspickerdialoglibrary/src/main/java/top/cyixlq/addresspickerdialoglibrary/adapter/SimpleAddressAdapter.java)
+
 [快速自定义DialogFragment，参照SimpleAddressDialogFragment](https://github.com/cyixlq/AddressPickerDialog/blob/master/addresspickerdialoglibrary/src/main/java/top/cyixlq/addresspickerdialoglibrary/SimpleAddressDialogFragment.java)
 
 ### 更新
