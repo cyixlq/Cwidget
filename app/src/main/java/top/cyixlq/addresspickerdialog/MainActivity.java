@@ -1,7 +1,7 @@
 package top.cyixlq.addresspickerdialog;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -9,12 +9,13 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import top.cyixlq.addresspickerdialoglibrary.AddressBottomSheetDialog;
+import top.cyixlq.addresspickerdialoglibrary.SimpleAddressDialogFragment;
+import top.cyixlq.addresspickerdialoglibrary.base.BaseAddressDialogFragment;
 import top.cyixlq.addresspickerdialoglibrary.bean.AddressItem;
 
 public class MainActivity extends AppCompatActivity {
 
-    private AddressBottomSheetDialog mDialog;
+    private SimpleAddressDialogFragment mDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,34 +25,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        mDialog = new AddressBottomSheetDialog(this);
+        mDialog = new SimpleAddressDialogFragment();
         mDialog.setMaxLevel(4);  // 设置地址最大级别
-        mDialog.setDialogTitle("配送至"); // 设置Dialog标题
-        mDialog.setTabDefaultText("请选择地区"); // 设置Tab默认显示的提示文字
-        mDialog.setTabSelectChangeListener(new AddressBottomSheetDialog.EventListener() {
+        mDialog.setTitle("配送至"); // 设置Dialog标题
+        mDialog.setOnEventListener(new BaseAddressDialogFragment.OnEventListener<AddressItem>() {
             @Override
-            public void onTabSelectChange(int level, Object parentId) {
-                int myId;
-                // parentId注意判空，如果为空代表没有父级地区
-                if (parentId == null) myId = 0;
-                else myId = (int) parentId;
-                mDialog.setCurrentAddressList(getAddressList(level, myId), level);
+            public List<AddressItem> onNeedAddressList(int level, Object parentID) {
+                final int id = parentID == null ? 0 : (int) parentID;
+                return getAddressList(level, id);
             }
 
             @Override
-            public void onResult(String address, AddressItem lastAddressItem) {
-                // address代表地址字符串，如某某省某某市某某县某某镇
+            public void onGotResult(String address, AddressItem theLastItem) {
                 Toast.makeText(MainActivity.this, address, Toast.LENGTH_SHORT).show();
                 mDialog.dismiss();
                 // lastAddressItem代表选择的最后一个级别的地区实体
-                Log.d("My_Tag", lastAddressItem.getAddress());
+                Log.d("My_Tag", theLastItem.getAddress());
             }
         });
 
         findViewById(R.id.btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mDialog.show();
+                mDialog.show(getSupportFragmentManager());
             }
         });
     }
