@@ -16,8 +16,9 @@
 [快速自定义DialogFragment，参照SimpleAddressDialogFragment](https://github.com/cyixlq/AddressPickerDialog/blob/master/addresspickerdialoglibrary/src/main/java/top/cyixlq/addresspickerdialoglibrary/SimpleAddressDialogFragment.java)
 
 ### 更新
-1. 改用DialogFragment作为Dialog
-2. 原来的Dialog中数据混杂难懂，进一步封装成PageData
-3. 回调接口更名，更语义化
-4. 可以自定义Adapter来适应自己的地址实体类，不需要重新封装成AddressItem
-5. 更多变更参照上面的使用方法
+- 2020年04月22日（前两天我的狗子——汤圆 失踪了，怀疑被偷，心情难受，wcnm偷狗贼，希望汤圆能安全回家）
+    1. 改用DialogFragment作为Dialog
+    2. 原来的Dialog中数据混杂难懂，进一步封装成PageData
+    3. 回调接口更名，更语义化
+    4. 可以自定义Adapter来适应自己的地址实体类，不需要重新封装成AddressItem
+    5. 更多变更参照上面的使用方法
