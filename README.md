@@ -1,7 +1,7 @@
 # AddressPickerDialog  一个类似于拼多多的地址选择器
 ### 效果图：
 
-![效果图.gif](https://upload-images.jianshu.io/upload_images/8654767-9055a2ffa9206627.gif?imageMogr2/auto-orient/strip)
+![效果图.gif](./images/示例.gif)
 
 ### 特点
 1. 自身没有创建数据库保存全中国地区信息，全部靠回调获取

@@ -33,6 +33,8 @@ public abstract class BaseAddressDialogFragment<T> extends DialogFragment {
     private String mTitle = ""; // 标题文字
     private String mDfTabText = "请选择"; // 默认还未选中地区时，tab显示的文字
     private int mMaxLevel = 3; // 最多有几级
+    private int mWidth = WindowManager.LayoutParams.MATCH_PARENT;
+    private int mHeight = 800;
 
     @Nullable
     @Override
@@ -112,8 +114,8 @@ public abstract class BaseAddressDialogFragment<T> extends DialogFragment {
         Window window = getDialog().getWindow();
         if (window == null) return;
         WindowManager.LayoutParams layoutParams = window.getAttributes();
-        layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
-        layoutParams.height = 800;
+        layoutParams.width = mWidth;
+        layoutParams.height = mHeight;
         layoutParams.horizontalMargin = 0;
         View decorView = window.getDecorView();
         decorView.setPadding(0,0,0,0);
@@ -221,6 +223,22 @@ public abstract class BaseAddressDialogFragment<T> extends DialogFragment {
      */
     public void setOnEventListener(OnEventListener<T> listener) {
         this.mListener = listener;
+    }
+
+    /**
+     *  设置Dialog宽度
+     * @param width 宽度
+     */
+    public void setWidth(final int width) {
+        this.mWidth = width;
+    }
+
+    /**
+     *  设置Dialog高度
+     * @param height 高度
+     */
+    public void setHeight(final int height) {
+        this.mHeight = height;
     }
 
     public interface OnEventListener<T>{
