@@ -25,6 +25,8 @@
   5. 更多变更参照上面的使用方法
 
 ## DatePickerDialogFragment 日期选择器弹框
+### 效果图
+![效果图](https://user-gold-cdn.xitu.io/2020/4/24/171a9f51d5e5112b?w=480&h=945&f=gif&s=1133795)
 ### 特点
 1. 可以单独选择一天也可以选择一段时间
 2. 其中有个CalendarView，基于RecyclerView实现，通过集成BaseCalendarAdapter可以实现自定义Item布局
