@@ -9,13 +9,17 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import top.cyixlq.addresspickerdialoglibrary.SimpleAddressDialogFragment;
-import top.cyixlq.addresspickerdialoglibrary.base.BaseAddressDialogFragment;
-import top.cyixlq.addresspickerdialoglibrary.bean.AddressItem;
+import top.cyixlq.widget.addresspickerdialog.SimpleAddressDialogFragment;
+import top.cyixlq.widget.addresspickerdialog.base.BaseAddressDialogFragment;
+import top.cyixlq.widget.addresspickerdialog.bean.AddressItem;
+import top.cyixlq.widget.calendar.DatePickerDialogFragment;
+import top.cyixlq.widget.calendar.bean.DateBean;
+
 
 public class MainActivity extends AppCompatActivity {
 
     private SimpleAddressDialogFragment mDialog;
+    private DatePickerDialogFragment mDatePickerDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +48,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.btn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mDialog.show(getSupportFragmentManager());
-            }
+        findViewById(R.id.btn).setOnClickListener(v -> mDialog.show(getSupportFragmentManager()));
+
+        mDatePickerDialog = new DatePickerDialogFragment();
+        mDatePickerDialog.setOnTimeSelectListener((start, end) -> {
+            final String msg = "开始时间：" + start.toString() + "\n" + "结束时间：" + end.toString();
+            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
         });
+        findViewById(R.id.btnDate).setOnClickListener(v -> mDatePickerDialog.show(getSupportFragmentManager()));
     }
 
     /**

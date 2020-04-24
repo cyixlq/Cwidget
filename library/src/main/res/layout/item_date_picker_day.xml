@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="32dp">
+    <View
+        android:id="@+id/bgLeft"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"/>
+    <TextView
+        android:id="@+id/tvDay"
+        android:layout_width="32dp"
+        android:layout_height="match_parent"
+        android:textSize="14dp"
+        android:textColor="#202020"
+        android:gravity="center"
+        tools:ignore="SpUsage" />
+    <View
+        android:id="@+id/bgRight"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"/>
+</merge>

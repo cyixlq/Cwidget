@@ -1,1 +1,1 @@
-include ':app', ':addresspickerdialoglibrary'
+include ':app', ':library'
