@@ -14,6 +14,7 @@ import top.cyixlq.widget.addresspickerdialog.base.BaseAddressDialogFragment;
 import top.cyixlq.widget.addresspickerdialog.bean.AddressItem;
 import top.cyixlq.widget.calendar.DatePickerDialogFragment;
 import top.cyixlq.widget.calendar.bean.DateBean;
+import top.cyixlq.widget.calendar.bean.SelectRule;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -51,6 +52,11 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btn).setOnClickListener(v -> mDialog.show(getSupportFragmentManager()));
 
         mDatePickerDialog = new DatePickerDialogFragment();
+        final SelectRule rule = new SelectRule();
+        rule.setCanSelectAfterToday(false); // 设置是否可以选择超过今天的时间
+        rule.setEnable(true); // 设置是否开启时间选择功能
+        rule.setMaxDayCount(30); // 设置最多可以选择多少天
+        mDatePickerDialog.setSelectRule(rule);
         mDatePickerDialog.setOnTimeSelectListener((start, end) -> {
             final String msg = "开始时间：" + start.toString() + "\n" + "结束时间：" + end.toString();
             Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();

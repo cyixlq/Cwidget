@@ -32,6 +32,7 @@ public abstract class BaseCalendarAdapter extends BaseAdapter<DateBean> {
         else
             itemOutMonth(holder);
         holder.itemView.setOnClickListener(v -> {
+            if (!selectRule.isEnable()) return; // 如果没启用可以选择日期，直接返回
             if (time.isLatterThanToday() && !selectRule.isCanSelectAfterToday()) {
                 onSelectAfterToday(holder);
                 return;
@@ -49,7 +50,7 @@ public abstract class BaseCalendarAdapter extends BaseAdapter<DateBean> {
                     firstDateBean = time;
                     notifyDataSetChanged();
                 } else if (selectRule.getMaxDayCount() > 0 && (Math.abs(time.getStamp() - firstDateBean.getStamp()) / 1000
-                        > selectRule.getMaxDayCount() * 24 * 3600)) {
+                        > (selectRule.getMaxDayCount() - 1) * 24 * 3600)) {
                     onMaxDayExceed(holder);
                 } else {
                     lastDateBean = time;

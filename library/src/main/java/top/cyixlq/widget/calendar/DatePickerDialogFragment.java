@@ -22,6 +22,7 @@ import java.util.Locale;
 
 import top.cyixlq.widget.R;
 import top.cyixlq.widget.calendar.bean.DateBean;
+import top.cyixlq.widget.calendar.bean.SelectRule;
 import top.cyixlq.widget.calendar.view.CalendarView;
 
 public class DatePickerDialogFragment extends DialogFragment implements View.OnClickListener{
@@ -30,6 +31,7 @@ public class DatePickerDialogFragment extends DialogFragment implements View.OnC
     private CalendarView rvCalendar;
     private Calendar calendar;
     private OnTimeSelectListener listener;
+    private SelectRule selectRule; // 选择规则
 
     @Nullable
     @Override
@@ -66,7 +68,9 @@ public class DatePickerDialogFragment extends DialogFragment implements View.OnC
         attributes.height = WindowManager.LayoutParams.WRAP_CONTENT;
         window.setBackgroundDrawableResource(R.drawable.bg_date_area_picker);
         calendar = Calendar.getInstance(Locale.CHINA);
-        rvCalendar.setAdapter(new SimpleCalendarAdapter());
+        final SimpleCalendarAdapter adapter = new SimpleCalendarAdapter();
+        adapter.setSelectRule(selectRule);
+        rvCalendar.setAdapter(adapter);
         setTimeView();
     }
 
@@ -113,6 +117,14 @@ public class DatePickerDialogFragment extends DialogFragment implements View.OnC
 
     public void setOnTimeSelectListener(OnTimeSelectListener listener) {
         this.listener = listener;
+    }
+
+    public void setSelectRule(SelectRule rule) {
+        if (rule == null) {
+            this.selectRule = new SelectRule();
+        } else {
+            this.selectRule = rule;
+        }
     }
 
     public interface OnTimeSelectListener {
