@@ -1,14 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion rootProject.build.compileSdkVersion
+
     defaultConfig {
-        applicationId "top.cyixlq.addresspickerdialog"
-        minSdkVersion 15
-        //noinspection OldTargetApi
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion rootProject.build.minSdkVersion
+        targetSdkVersion rootProject.build.targetSdkVersion
+        versionCode rootProject.build.versionCode
+        versionName rootProject.build.versionName
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -25,12 +25,13 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support:appcompat-v7:28.0.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-    implementation 'com.android.support:recyclerview-v7:28.0.0'
-    implementation 'com.android.support:design:28.0.0'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation project(':library')
+    implementation rootProject.dep.appcompat
+    implementation rootProject.dep.constraintlayout
+    implementation rootProject.dep.recyclerview
+    implementation rootProject.dep.material
+
+    testImplementation rootProject.test.junit
+    androidTestImplementation rootProject.test.runner
+    androidTestImplementation rootProject.test.espresso
 }

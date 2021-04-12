@@ -1,25 +1,24 @@
 package top.cyixlq.addresspickerdialog;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import top.cyixlq.widget.addresspickerdialog.SimpleAddressDialogFragment;
+import top.cyixlq.widget.addresspickerdialog.SimpleLevelDialogFragment;
 import top.cyixlq.widget.addresspickerdialog.base.BaseAddressDialogFragment;
 import top.cyixlq.widget.addresspickerdialog.bean.AddressItem;
 import top.cyixlq.widget.calendar.DatePickerDialogFragment;
-import top.cyixlq.widget.calendar.bean.DateBean;
 import top.cyixlq.widget.calendar.bean.SelectRule;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    private SimpleAddressDialogFragment mDialog;
+    private SimpleLevelDialogFragment mDialog;
     private DatePickerDialogFragment mDatePickerDialog;
 
     @Override
@@ -30,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        mDialog = new SimpleAddressDialogFragment();
+        mDialog = new SimpleLevelDialogFragment();
         mDialog.setMaxLevel(4);  // 设置地址最大级别
         mDialog.setTitle("配送至"); // 设置Dialog标题
         mDialog.setOnEventListener(new BaseAddressDialogFragment.OnEventListener<AddressItem>() {

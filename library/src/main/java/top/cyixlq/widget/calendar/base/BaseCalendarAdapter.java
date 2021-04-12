@@ -1,7 +1,8 @@
 package top.cyixlq.widget.calendar.base;
 
-import android.support.annotation.Nullable;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
 
 import top.cyixlq.widget.calendar.bean.DateBean;
 import top.cyixlq.widget.calendar.bean.SelectRule;

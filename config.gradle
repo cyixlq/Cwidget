@@ -1,0 +1,28 @@
+ext {
+    versions = [
+            kotlin: '1.4.31'
+    ]
+    dep = [
+            appcompat: 'androidx.appcompat:appcompat:1.2.0',
+            kotlin_lib: 'org.jetbrains.kotlin:kotlin-stdlib:' + versions.kotlin,
+            recyclerview: 'androidx.recyclerview:recyclerview:1.1.0',
+            material: 'com.google.android.material:material:1.3.0',
+            constraintlayout: 'androidx.constraintlayout:constraintlayout:2.0.4'
+    ]
+    test = [
+            junit: 'junit:junit:4.13.2',
+            runner: 'com.android.support.test:runner:1.0.2',
+            espresso: 'com.android.support.test.espresso:espresso-core:3.0.2'
+    ]
+    build = [
+            compileSdkVersion: 30,
+            minSdkVersion: 15,
+            targetSdkVersion: 30,
+            versionCode: 1,
+            versionName: '1.0.0'
+    ]
+    plugin_path = [
+            android_plugin: 'com.android.tools.build:gradle:4.1.3',
+            kotlin_plugin: 'org.jetbrains.kotlin:kotlin-gradle-plugin:' + versions.kotlin
+    ]
+}

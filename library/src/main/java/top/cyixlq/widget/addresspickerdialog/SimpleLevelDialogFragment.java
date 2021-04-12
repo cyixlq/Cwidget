@@ -1,17 +1,18 @@
 package top.cyixlq.widget.addresspickerdialog;
 
-import android.support.v4.app.FragmentManager;
 import android.view.Gravity;
 
+import androidx.fragment.app.FragmentManager;
+
 import top.cyixlq.widget.R;
-import top.cyixlq.widget.addresspickerdialog.adapter.SimpleAddressAdapter;
+import top.cyixlq.widget.addresspickerdialog.adapter.SimpleLevelAdapter;
 import top.cyixlq.widget.addresspickerdialog.base.BaseAddressDialogFragment;
 import top.cyixlq.widget.addresspickerdialog.bean.AddressItem;
 
-public class SimpleAddressDialogFragment extends BaseAddressDialogFragment<AddressItem> {
+public class SimpleLevelDialogFragment extends BaseAddressDialogFragment<AddressItem> {
 
-    public SimpleAddressDialogFragment() {
-        setAdapter(new SimpleAddressAdapter());
+    public SimpleLevelDialogFragment() {
+        setAdapter(new SimpleLevelAdapter());
     }
 
     @Override

@@ -1,11 +1,6 @@
 package top.cyixlq.widget.addresspickerdialog.base;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.DialogFragment;
-import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -14,6 +9,13 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.List;
 
@@ -25,7 +27,7 @@ public abstract class BaseAddressDialogFragment<T> extends DialogFragment {
     private RecyclerView mRvAddress;
     private TextView mTvTitle;
     private TabLayout mTabLayout;
-    private BaseAddressAdapter<T> mAdapter;
+    private BaseLevelAdapter<T> mAdapter;
 
     private SparseArray<PageData<T>> mPageDataMap; // 每个级别的页面数据
     private OnEventListener<T> mListener; // 事件监听回调
@@ -92,11 +94,11 @@ public abstract class BaseAddressDialogFragment<T> extends DialogFragment {
             @Override
             public void onTabReselected(TabLayout.Tab tab) {}
         });
-        mAdapter.setOnItemClickListener(new BaseAddressAdapter.OnItemClickListener<T>() {
+        mAdapter.setOnItemClickListener(new BaseLevelAdapter.OnItemClickListener<T>() {
             @Override
-            public void onItemClick(int nowClickPosition, Object addressId, String addressName) {
+            public void onItemClick(int nowClickPosition, T parent) {
                 final int level = mTabLayout.getSelectedTabPosition(); // 当前级别
-                changeTabSelect(level, nowClickPosition, addressId, addressName);
+                changeTabSelect(level, nowClickPosition, parent);
                 if (level < mMaxLevel - 1 && level == mTabLayout.getTabCount() - 1) {
                     mTabLayout.addTab(createTab(), true);
                     mRvAddress.smoothScrollToPosition(0);
@@ -202,7 +204,7 @@ public abstract class BaseAddressDialogFragment<T> extends DialogFragment {
      *  设置自定义的适配器
      * @param adapter 继承自BaseAdapter的适配器
      */
-    public void setAdapter(BaseAddressAdapter<T> adapter) {
+    public void setAdapter(BaseLevelAdapter<T> adapter) {
         if (adapter == null) {
             throw new NullPointerException("adapter can not set null!");
         }

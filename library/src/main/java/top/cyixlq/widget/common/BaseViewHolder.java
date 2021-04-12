@@ -1,22 +1,36 @@
 package top.cyixlq.widget.common;
 
-import android.support.annotation.ColorInt;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.IdRes;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import android.util.SparseArray;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.IdRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
+
 public class BaseViewHolder extends RecyclerView.ViewHolder {
+
+    private final SparseArray<View> views = new SparseArray<>();
 
     public BaseViewHolder(@NonNull View itemView) {
         super(itemView);
     }
 
+
+    @SuppressWarnings("unchecked")
+    @Nullable
     public <T extends View> T getView(@IdRes final int id) {
-        return itemView.findViewById(id);
+        View view = views.get(id);
+        if (view == null) {
+            view = itemView.findViewById(id);
+            views.put(id, view);
+            return (T) view;
+        }
+        return (T) view;
     }
 
     public BaseViewHolder setText(@IdRes final int id, final String text) {

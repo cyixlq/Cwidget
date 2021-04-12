@@ -17,7 +17,7 @@
         android:layout_height="1dp"
         android:background="#e6e6e6"
         android:layout_marginTop="17dp"/>
-    <android.support.design.widget.TabLayout
+    <com.google.android.material.tabs.TabLayout
         android:id="@+id/user_tb_dialog_tab"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,10 +28,10 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#e6e6e6"/>
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/user_rv_dialog_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 </LinearLayout>

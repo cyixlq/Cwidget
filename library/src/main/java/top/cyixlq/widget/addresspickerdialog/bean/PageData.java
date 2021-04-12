@@ -5,9 +5,7 @@ import java.util.List;
 public class PageData<T> {
 
     private List<T> items;
-    private int selectedIndex = -1; // 当前页面选中的下表
-    private Object selectedId; // 当前页面选中的地址的id
-    private String selectedAddressText; // 当前页面选中的地址名称
+    private int selectedIndex = -1; // 当前页面选中的下标
 
     public List<T> getItems() {
         return items;
@@ -23,21 +21,5 @@ public class PageData<T> {
 
     public void setSelectedIndex(int selectedIndex) {
         this.selectedIndex = selectedIndex;
-    }
-
-    public Object getSelectedId() {
-        return selectedId;
-    }
-
-    public void setSelectedId(Object selectedId) {
-        this.selectedId = selectedId;
-    }
-
-    public String getSelectedAddressText() {
-        return selectedAddressText;
-    }
-
-    public void setSelectedAddressText(String selectedAddressText) {
-        this.selectedAddressText = selectedAddressText;
     }
 }
