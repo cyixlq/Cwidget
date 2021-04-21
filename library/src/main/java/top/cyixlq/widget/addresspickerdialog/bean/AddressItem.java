@@ -3,8 +3,8 @@ package top.cyixlq.widget.addresspickerdialog.bean;
 public class AddressItem {
 
     private String address;
-    private boolean isChecked;
     private Object id;
+    private boolean isChecked;
 
     public String getAddress() {
         return this.address;
@@ -12,14 +12,6 @@ public class AddressItem {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public boolean isChecked() {
-        return this.isChecked;
-    }
-
-    public void setChecked(boolean checked) {
-        this.isChecked = checked;
     }
 
     public Object getId() {
@@ -34,7 +26,6 @@ public class AddressItem {
     public String toString() {
         return "AddressItem{" +
                 "address='" + address + '\'' +
-                ", isChecked=" + isChecked +
                 ", id=" + id +
                 '}';
     }

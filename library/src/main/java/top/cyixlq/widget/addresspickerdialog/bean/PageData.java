@@ -5,7 +5,7 @@ import java.util.List;
 public class PageData<T> {
 
     private List<T> items;
-    private int selectedIndex = -1; // 当前页面选中的下标
+    private int selectIndex = -1;
 
     public List<T> getItems() {
         return items;
@@ -15,11 +15,11 @@ public class PageData<T> {
         this.items = items;
     }
 
-    public int getSelectedIndex() {
-        return selectedIndex;
+    public int getSelectIndex() {
+        return selectIndex;
     }
 
-    public void setSelectedIndex(int selectedIndex) {
-        this.selectedIndex = selectedIndex;
+    public void setSelectIndex(int selectIndex) {
+        this.selectIndex = selectIndex;
     }
 }

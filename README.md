@@ -28,6 +28,12 @@
   3. 回调接口更名，更语义化
   4. 可以自定义Adapter来适应自己的地址实体类，不需要重新封装成AddressItem
   5. 更多变更参照上面的使用方法
+- 2021年04月21日
+  1. 重新整活地址选择器，其实地址选择器已经不止于地址选择，只要是层级选择类的都可以继承这个BaseLevelDialogFragment
+  2. 之前忽略了网络请求回调问题，在onNeedAddressList需要大家直接返回List，但是网络请求往往是回调形式，并不是同步请求就能拿到结果的，所以改成
+  onNeedData(int level, T parentNode, @NonNull BaseLevelDialogFragment.GotDataListener<T> onGotDataListener)，可以利用成员变量将onGotDataListener
+  保存下来，在网络请求到结果后，调用onGotDataListener.onGotData
+  3. 详情可以[参照MainActivity](https://github.com/cyixlq/AddressPickerDialog/blob/master/app/src/main/java/top/cyixlq/addresspickerdialog/MainActivity.java)
 
 #### DatePickerDialogFragment 日期选择器弹框
 ##### 效果图

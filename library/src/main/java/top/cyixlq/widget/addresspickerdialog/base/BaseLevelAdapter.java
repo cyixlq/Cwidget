@@ -8,6 +8,7 @@ import top.cyixlq.widget.common.BaseViewHolder;
 public abstract class BaseLevelAdapter<T> extends BaseAdapter<T> {
 
     private OnItemClickListener<T> listener;
+    private int selectIndex = -1;
 
     public BaseLevelAdapter(@LayoutRes final int layoutId) {
         super(layoutId);
@@ -15,11 +16,10 @@ public abstract class BaseLevelAdapter<T> extends BaseAdapter<T> {
 
     @Override
     public void convert(BaseViewHolder holder, T item) {
+        final int position = holder.getAdapterPosition();
+        convertItem(holder, item, position == selectIndex);
         if (this.listener != null) {
-            holder.itemView.setOnClickListener(v -> {
-                final int position = holder.getAdapterPosition();
-                listener.onItemClick(position, getItem(position));
-            });
+            holder.itemView.setOnClickListener(v -> listener.onItemClick(position, item));
         }
     }
 
@@ -27,7 +27,22 @@ public abstract class BaseLevelAdapter<T> extends BaseAdapter<T> {
         this.listener = listener;
     }
 
+    public void setItemSelect(int position, boolean isSelected) {
+        if (isSelected) {
+            final int lastIndex = selectIndex;
+            selectIndex = position;
+            if (lastIndex != -1)
+                notifyItemChanged(lastIndex);
+        }
+        if (position != -1)
+            notifyItemChanged(position);
+    }
+
+    public abstract void convertItem(BaseViewHolder holder, T item, boolean isSelected);
+    public abstract String getTabText(T item);
+    public abstract boolean hasMore(T item);
+
     public interface OnItemClickListener<T> {
-        void onItemClick(final int position, final T parent);
+        void onItemClick(final int position, final T item);
     }
 }

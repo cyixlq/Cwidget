@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion rootProject.build.compileSdkVersion
@@ -26,6 +27,7 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':library')
+    implementation rootProject.dep.kotlin_lib
     implementation rootProject.dep.appcompat
     implementation rootProject.dep.constraintlayout
     implementation rootProject.dep.recyclerview

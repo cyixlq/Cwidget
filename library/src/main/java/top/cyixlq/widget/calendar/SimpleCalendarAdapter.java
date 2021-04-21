@@ -2,6 +2,7 @@ package top.cyixlq.widget.calendar;
 
 import top.cyixlq.widget.R;
 import top.cyixlq.widget.calendar.base.BaseCalendarAdapter;
+import top.cyixlq.widget.calendar.bean.DateBean;
 import top.cyixlq.widget.calendar.view.DateItemView;
 import top.cyixlq.widget.common.BaseViewHolder;
 
@@ -45,5 +46,13 @@ public class SimpleCalendarAdapter extends BaseCalendarAdapter {
     @Override
     public void itemSingleDay(BaseViewHolder holder) {
         holder.<DateItemView>getView(R.id.dateItemView).setState(DateItemView.STATE_SINGLE_DAY);
+    }
+
+    @Override
+    public void onMaxDayExceed(BaseViewHolder holder, DateBean date) {
+        if (selectRule.getMaxDayCount() == 1)
+            changeFirstDateBean(date);
+        else
+            super.onMaxDayExceed(holder, date);
     }
 }

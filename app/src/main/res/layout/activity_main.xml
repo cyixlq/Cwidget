@@ -13,6 +13,12 @@
         android:text="点击选择地址"
         tools:ignore="HardcodedText" />
     <Button
+        android:id="@+id/btn2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="点击选择地址2"
+        tools:ignore="HardcodedText" />
+    <Button
         android:id="@+id/btnDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -13,7 +13,7 @@ public abstract class BaseCalendarAdapter extends BaseAdapter<DateBean> {
 
     private DateBean firstDateBean;
     private DateBean lastDateBean;
-    private SelectRule selectRule;
+    protected SelectRule selectRule;
 
     public BaseCalendarAdapter(int layoutId) {
         super(layoutId);
@@ -52,7 +52,7 @@ public abstract class BaseCalendarAdapter extends BaseAdapter<DateBean> {
                     notifyDataSetChanged();
                 } else if (selectRule.getMaxDayCount() > 0 && (Math.abs(time.getStamp() - firstDateBean.getStamp()) / 1000
                         > (selectRule.getMaxDayCount() - 1) * 24 * 3600)) {
-                    onMaxDayExceed(holder);
+                    onMaxDayExceed(holder, time);
                 } else {
                     lastDateBean = time;
                     notifyDataSetChanged();
@@ -114,6 +114,16 @@ public abstract class BaseCalendarAdapter extends BaseAdapter<DateBean> {
         return lastDateBean;
     }
 
+    public void changeFirstDateBean(DateBean date) {
+        this.firstDateBean = date;
+        notifyDataSetChanged();
+    }
+
+    public void changeLastDateBean(DateBean date) {
+        this.firstDateBean = date;
+        notifyDataSetChanged();
+    }
+
     // -------------------------—————————— 按照需求自定义方法 -----------------------------------------
 
     /**
@@ -128,7 +138,7 @@ public abstract class BaseCalendarAdapter extends BaseAdapter<DateBean> {
      * 当用户选择的天数超出了规则中设置的最多天数的回调，这是一个默认实现，你可以重写此方法来自己实现
      * @param holder holder
      */
-    public void onMaxDayExceed(BaseViewHolder holder) {
+    public void onMaxDayExceed(BaseViewHolder holder, DateBean date) {
         Toast.makeText(holder.itemView.getContext(), "最多只能选择" + selectRule.getMaxDayCount() + "天", Toast.LENGTH_SHORT).show();
     }
 

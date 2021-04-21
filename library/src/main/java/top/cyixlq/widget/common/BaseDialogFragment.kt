@@ -27,23 +27,26 @@ abstract class BaseDialogFragment : DialogFragment() {
         return mRootView.findViewById(id)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
         if (dialog == null) return
         val window = dialog!!.window ?: return
-        window.setGravity(Gravity.BOTTOM)
-        getWindowAnimations()?.let {
-            window.setWindowAnimations(it)
-        }
-        val decorView = window.decorView
-        decorView.setPadding(0, 0, 0, 0)
         val attributes = window.attributes
         attributes.width = getWidth()
         attributes.height = getHeight()
+        attributes.horizontalMargin = 0F
+        window.attributes = attributes
+        window.decorView.setPadding(0, 0, 0, 0)
+        window.setGravity(getGravity())
         getBackgroundDrawableResource()?.let {
             window.setBackgroundDrawableResource(it)
         }
+        getWindowAnimations()?.let {
+            window.setWindowAnimations(it)
+        }
     }
+
+    open fun getGravity(): Int = Gravity.BOTTOM
 
     open fun getBackgroundDrawableResource(): Int? = null
 
