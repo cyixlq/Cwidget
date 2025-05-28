@@ -1,3 +1,7 @@
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=cyixlq/Cwidget&type=Date)](https://www.star-history.com/#cyixlq/Cwidget&Date)
+
 # Cwidget  一个自用的UI控件库，目前控件数量不多，同时为了方便大家便开源了
 #### 目录
 - [AddressPickerDialog 地址选择器弹框](#addresspickerdialog-地址选择器弹框)
